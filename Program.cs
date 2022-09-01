@@ -114,7 +114,10 @@ namespace NinetiesTV
         // 10. Return all shows except for the lowest rated show.
         static List<Show> AllButWorst(List<Show> shows)
         {
-            throw new NotImplementedException();
+            return shows
+                .OrderBy(s => s.ImdbRating)
+                .Skip(1)
+                .ToList();
         }
 
         // 11. Return the names of the shows that had fewer than 100 episodes.
