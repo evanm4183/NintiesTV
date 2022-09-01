@@ -106,7 +106,9 @@ namespace NinetiesTV
         // 9. Return the shows whose name starts with the word "The".
         static List<Show> TheShows(List<Show> shows)
         {
-            throw new NotImplementedException();
+            return shows
+                .Where(s => s.Name.StartsWith("The"))
+                .ToList();
         }
 
         // 10. Return all shows except for the lowest rated show.
