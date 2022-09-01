@@ -160,10 +160,7 @@ namespace NinetiesTV
         // 15. Return the show with the most episodes.
         static Show MostEpisodes(List<Show> shows)
         {  
-            int maxEpisodes = shows.Max(s => s.EpisodeCount);
-
-            return shows.FirstOrDefault(s => s.EpisodeCount == maxEpisodes);
-            //return shows.OrderByDescending(s => s.EpisodeCount).ToList()[0];
+            return shows.OrderByDescending(s => s.EpisodeCount).ToList()[0];
         }
 
         // 16. Order the shows by their ending year then return the first 
@@ -216,20 +213,22 @@ namespace NinetiesTV
         static Show WordieastName(List<Show> shows)
         {
             return shows
-                .OrderByDescending(s => s.Name.Length)
+                .OrderByDescending(s => s.Name.Split(" ").Count())
                 .ToList()[0];
         }
 
         // 22. Return the names of all shows as a single string seperated by a comma and a space.
         static string AllNamesWithCommas(List<Show> shows)
         {
-            throw new NotImplementedException();
+            return shows
+                .Select(s => s.Name)
+                .Aggregate((total, name) => total + ", " + name);
         }
 
         // 23. Do the same as above, but put the word "and" between the second-to-last and last show name.
         static string AllNamesWithCommasPlsAnd(List<Show> shows)
         {
-            throw new NotImplementedException();
+            return string.Join(", ", shows.Select(s => s.Name).Take(shows.Count - 1)) + $", and {shows.Last().Name}";
         }
 
 
